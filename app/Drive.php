@@ -109,4 +109,104 @@ class Drive
             return null;
         }
     }
+    public function moveFile($fileId, $newFolderId)
+    {
+        try {
+
+            $file = $this->service->files->get($fileId, ['fields' => 'parents']);
+            $previousParents = join(',', $file->parents);
+
+            $updatedFile = $this->service->files->update($fileId, new DriveFile(), [
+                'addParents' => $newFolderId,
+                'removeParents' => $previousParents,
+                'fields' => 'id, parents'
+            ]);
+
+            return $updatedFile->getId();
+        } catch (Exception $e) {
+            echo 'An error occurred: ' . $e->getMessage();
+            return null;
+        }
+    }
+
+    public function getStorageDetails()
+    {
+        try {
+            $about = $this->service->about->get(['fields' => 'storageQuota']);
+            $storageQuota = $about->getStorageQuota();
+
+            $totalStorage = $storageQuota['limit']; // Total storage limit
+            $usedStorage = $storageQuota['usage']; // Total storage used
+
+            return [
+                'total_storage' => $totalStorage / (1024 ** 3),
+                'used_storage' => $usedStorage / (1024 ** 3),
+                'remaining_storage' => ($totalStorage - $usedStorage) / (1024 ** 3)
+            ];
+        } catch (Exception $e) {
+            echo 'An error occurred: ' . $e->getMessage();
+            return null;
+        }
+    }
+    public function initiateOwnershipTransfer($fileId, $newOwnerEmail)
+    {
+        $permission = new Permission();
+        $permission->setType('user');
+        $permission->setRole('writer');
+        $permission->setEmailAddress('laravel-drive-arsip@laravel-drive-428422.iam.gserviceaccount.com');
+        $permission->setPendingOwner(true);
+
+
+        $this->service->permissions->create($fileId, $permission);
+
+        $permissions = $this->service->permissions->listPermissions($fileId);
+        foreach ($permissions->getPermissions() as $permission) {
+            $permissionId = $permission->getId();
+            $updatedPermission = new Permission();
+            $updatedPermission->setRole('owner');
+            // $updatedPermission->setType('user');
+            $permission->setEmailAddress($newOwnerEmail);
+            try {
+                $this->service->permissions->update($fileId, $permissionId, $updatedPermission, [
+                    'transferOwnership' => true
+                ]);
+
+                echo "Ownership accepted by: " . $newOwnerEmail;
+                return;
+            } catch (Exception $e) {
+                echo 'An error occurred: ' . $e->getMessage();
+                return;
+            }
+        }
+    }
+    // public function acceptOwnershipTransfer($fileId, $newOwnerEmail)
+    // {
+    //     $permissions = $this->service->permissions->listPermissions($fileId);
+    //     dd($permissions);
+    //     foreach ($permissions->getPermissions() as $permission) {
+    //         $permissionId = $permission->getId();
+    //         $updatedPermission = new Permission();
+    //         $updatedPermission->setRole('owner');
+    //         $permission->setEmailAddress($newOwnerEmail);
+    //         try {
+    //             $this->service->permissions->update($fileId, $permissionId, $updatedPermission, [
+    //                 'transferOwnership' => true
+    //             ]);
+
+    //             echo "Ownership accepted by: " . $newOwnerEmail;
+    //             return;
+    //         } catch (Exception $e) {
+    //             echo 'An error occurred: ' . $e->getMessage();
+    //             return;
+    //         }
+    //     }
+
+    //     echo 'Permission not found for the new owner.';
+    // }
+
+    public function transferOwnership($fileId, $newOwnerEmail)
+    {
+        // Initiate the ownership transfer
+        $this->initiateOwnershipTransfer($fileId, $newOwnerEmail);
+    }
 }

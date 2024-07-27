@@ -52,16 +52,14 @@ class ArsipController extends Controller
         $category = Category::where('id', $request->category_id)->firstOrFail();
         $drive = new Drive();
 
-        if($request->title){
+        if ($request->title) {
             $storedPath = $request->file('file')->storeAs('temporary', $request->title);
-            
-        }else{
+        } else {
             $storedPath = $request->file('file')->storeAs('temporary', $request->file('file')->getClientOriginalName());
         }
 
-
         $path = Storage::path($storedPath);
-        $fileId = $drive->uploadFile($path);
+        $fileId = $drive->uploadFile($path, $category->folderId);
 
         Storage::delete($storedPath);
 
@@ -102,7 +100,7 @@ class ArsipController extends Controller
     {
         $request->validate([
             'title' => 'required|min:3',
-            'description' => 'min:3',
+            'description' => 'nullable|min:3',
             'category_id' => 'required|numeric',
         ]);
 
@@ -112,12 +110,10 @@ class ArsipController extends Controller
 
         $client = new Drive();
         $client->renameFile($fileId, $request->title);
-
+        $client->moveFile($fileId, $category->folderId);
         $archive->update($request->all());
 
 
         return back();
     }
-
-
 }

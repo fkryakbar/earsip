@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Drive;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,28 +22,40 @@ class KategoriController extends Controller
         $request->validate([
             'name' => ['required', 'unique:App\Models\Category,name'],
         ]);
+
+        $client = new Drive();
+        $folderId =  $client->createFolder($request->name);
+
+        $request->merge([
+            'folderId' => $folderId,
+        ]);
+
         Category::create($request->all());
         return back();
     }
 
-    // public function update($id, Request $request)
-    // {
-    //     $request->validate([
-    //         'name' => ['required', 'unique:App\Models\Category,name,' . $id],
-    //     ]);
-    //     $category = Category::where('id', $id)->firstOrFail();
-    //     dd(Storage::disk('google')->move('hello/[KYM5MNXYEYF]R.jpeg', 'Sertifikat/[KYM5MNXYEYF]R.jpeg'));
-    //     Gdrive::renameDir($category->name, $request->name);
-    //     $category->update($request->all());
-    //     return back();
-    // }
+    public function update($id, Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'unique:App\Models\Category,name,' . $id],
+        ]);
+        $category = Category::where('id', $id)->firstOrFail();
+
+        $client = new Drive();
+
+        $client->renameFolder($category->folderId, $request->name);
+
+        $category->update($request->all());
+        return back();
+    }
 
 
     public function delete($id)
     {
 
         $category = Category::where('id', $id)->firstOrFail();
-        Gdrive::deleteDir($category->name);
+        $client = new Drive();
+
         $category->delete();
         return back();
     }

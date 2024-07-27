@@ -1,5 +1,6 @@
 <?php
 
+use App\Drive;
 use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
@@ -23,11 +24,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategoriPage');
     Route::post('/kategori', [KategoriController::class, 'create'])->name('createKategori');
+    Route::patch('/kategori/{id}', [KategoriController::class, 'update'])->name('updateKategori');
     Route::delete('/kategori/{id}', [KategoriController::class, 'delete'])->name('deleteKategori');
 
     // Route::get('/config', [ConfigController::class, 'index'])->name('configPage');
     // Route::post('/config', [ConfigController::class, 'update'])->name('updateConfig');
 
 
-    Route::get('/test', [ArsipController::class, 'test'])->name('test');
+    Route::get('qouta', function () {
+        $client = new Drive();
+
+        $data = $client->getStorageDetails();
+        dd($data);
+    });
 });
