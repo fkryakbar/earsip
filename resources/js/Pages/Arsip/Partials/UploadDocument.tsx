@@ -5,10 +5,11 @@ import { FormEventHandler } from "react";
 
 export default function UploadDocument({ categories }: { categories: Category[] }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { setData, data, processing, post, errors, progress, reset, recentlySuccessful } = useForm<{ title: string, description: string, category_id: string, file: any, sameWithTitle: boolean }>({
+    const { setData, data, processing, post, errors, progress, reset, recentlySuccessful } = useForm<{ title: string, description: string, category_id: string, file: any, sameWithTitle: boolean, visibility: string }>({
         title: '',
         description: '',
         category_id: '',
+        visibility: '',
         file: '',
         sameWithTitle: false,
     })
@@ -63,7 +64,7 @@ export default function UploadDocument({ categories }: { categories: Category[] 
                                     label="Ketegori"
                                     placeholder="Pilih Kategori"
                                     variant="bordered"
-                                    className="max-w-xs"
+                                    className="max-w-xs mb-[40px]"
                                     labelPlacement="outside"
                                     onChange={e => setData('category_id', e.target.value)}
                                     isDisabled={processing}
@@ -71,6 +72,21 @@ export default function UploadDocument({ categories }: { categories: Category[] 
                                     value={data.category_id}
                                 >
                                     {(category) => <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>}
+                                </Select>
+                                <Select
+                                    items={categories}
+                                    label="Visibility"
+                                    placeholder="Pilih Visibility"
+                                    variant="bordered"
+                                    className="max-w-xs"
+                                    labelPlacement="outside"
+                                    onChange={e => setData('visibility', e.target.value)}
+                                    isDisabled={processing}
+                                    errorMessage={errors.visibility} isInvalid={errors.visibility ? true : false}
+                                    value={data.visibility}
+                                >
+                                    <SelectItem key={'public'} value={'public'}>Public</SelectItem>
+                                    <SelectItem key={'private'} value={'private'}>Private</SelectItem>
                                 </Select>
 
                                 <label className={`block mb-2 text-sm text-gray-900 mt-[20px] ${errors.file ? 'text-red-500' : ''}`} htmlFor="file_input">Upload file</label>

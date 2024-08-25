@@ -17,7 +17,8 @@ class Drive
     public function __construct()
     {
         $this->client = new Client();
-        $this->client->useApplicationDefaultCredentials();
+        // $this->client->useApplicationDefaultCredentials();
+        $this->client->setAccessToken(session('token'));
         $this->client->addScope(DriveDrive::DRIVE);
         $this->service = new DriveDrive($this->client);
         $this->folderId = env('DRIVE_FOLDER_ID');
@@ -148,65 +149,62 @@ class Drive
             return null;
         }
     }
-    public function initiateOwnershipTransfer($fileId, $newOwnerEmail)
+
+    public function editPermission($fileId, $permissionType = 'reader')
     {
+
         $permission = new Permission();
-        $permission->setType('user');
-        $permission->setRole('writer');
-        $permission->setEmailAddress('laravel-drive-arsip@laravel-drive-428422.iam.gserviceaccount.com');
-        $permission->setPendingOwner(true);
 
-
-        $this->service->permissions->create($fileId, $permission);
-
-        $permissions = $this->service->permissions->listPermissions($fileId);
-        foreach ($permissions->getPermissions() as $permission) {
-            $permissionId = $permission->getId();
-            $updatedPermission = new Permission();
-            $updatedPermission->setRole('owner');
-            // $updatedPermission->setType('user');
-            $permission->setEmailAddress($newOwnerEmail);
-            try {
-                $this->service->permissions->update($fileId, $permissionId, $updatedPermission, [
-                    'transferOwnership' => true
-                ]);
-
-                echo "Ownership accepted by: " . $newOwnerEmail;
-                return;
-            } catch (Exception $e) {
-                echo 'An error occurred: ' . $e->getMessage();
-                return;
+        if ($permissionType === 'private') {
+            $permissions = $this->service->permissions->listPermissions($fileId);
+            foreach ($permissions->getPermissions() as $perm) {
+                if ($perm->getType() === 'anyone') {
+                    $this->service->permissions->delete($fileId, $perm->getId());
+                }
             }
+            return true;
+        }
+
+        $role = $permissionType === 'writer' ? 'writer' : 'reader';
+        $permission->setRole($role);
+        $permission->setType('anyone');
+
+        try {
+            $this->service->permissions->create($fileId, $permission);
+            return true;
+        } catch (Exception $e) {
+            echo 'An error occurred: ' . $e->getMessage();
+            return false;
         }
     }
-    // public function acceptOwnershipTransfer($fileId, $newOwnerEmail)
-    // {
-    //     $permissions = $this->service->permissions->listPermissions($fileId);
-    //     dd($permissions);
-    //     foreach ($permissions->getPermissions() as $permission) {
-    //         $permissionId = $permission->getId();
-    //         $updatedPermission = new Permission();
-    //         $updatedPermission->setRole('owner');
-    //         $permission->setEmailAddress($newOwnerEmail);
-    //         try {
-    //             $this->service->permissions->update($fileId, $permissionId, $updatedPermission, [
-    //                 'transferOwnership' => true
-    //             ]);
 
-    //             echo "Ownership accepted by: " . $newOwnerEmail;
-    //             return;
-    //         } catch (Exception $e) {
-    //             echo 'An error occurred: ' . $e->getMessage();
-    //             return;
-    //         }
-    //     }
 
-    //     echo 'Permission not found for the new owner.';
-    // }
 
-    public function transferOwnership($fileId, $newOwnerEmail)
+
+    public  function listFilesAndFolders($folderId = null)
     {
-        // Initiate the ownership transfer
-        $this->initiateOwnershipTransfer($fileId, $newOwnerEmail);
+        $folderId = $folderId ?: $this->folderId;
+
+        try {
+            $parameters = [
+                'q' => "'{$folderId}' in parents and trashed=false",
+                'fields' => 'files(id, name, mimeType)'
+            ];
+            $files = $this->service->files->listFiles($parameters);
+            $items = [];
+
+            foreach ($files as $file) {
+                $items[] = [
+                    'id' => $file->getId(),
+                    'name' => $file->getName(),
+                    'mime_type' => $file->getMimeType()
+                ];
+            }
+
+            return $items;
+        } catch (Exception $e) {
+            echo 'An error occurred: ' . $e->getMessage();
+            return null;
+        }
     }
 }

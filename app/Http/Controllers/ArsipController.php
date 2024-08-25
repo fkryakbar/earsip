@@ -36,7 +36,8 @@ class ArsipController extends Controller
         $request->validate([
             'title' => 'nullable|min:3',
             'category_id' => 'required|numeric',
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:2048'
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:2048',
+            'visibility' => 'required',
         ]);
         if ($request->sameWithTitle) {
             $request->merge([
@@ -64,6 +65,13 @@ class ArsipController extends Controller
         Storage::delete($storedPath);
 
         $driveLink = $drive->generateShareableLink($fileId);
+
+        if ($request->visibility == 'public') {
+            $drive->editPermission($fileId, 'reader');
+        } else {
+            $drive->editPermission($fileId, 'private');
+        }
+
         $request->mergeIfMissing([
             'fileId' => $fileId,
             'user_id' => Auth::user()->id,
@@ -102,8 +110,8 @@ class ArsipController extends Controller
             'title' => 'required|min:3',
             'description' => 'nullable|min:3',
             'category_id' => 'required|numeric',
+            'visibility' => 'required',
         ]);
-
 
         $archive = Archive::where('fileId', $fileId)->where('user_id', Auth::user()->id)->firstOrFail();
         $category = Category::where('id', $request->category_id)->firstOrFail();
@@ -111,6 +119,13 @@ class ArsipController extends Controller
         $client = new Drive();
         $client->renameFile($fileId, $request->title);
         $client->moveFile($fileId, $category->folderId);
+
+        if ($request->visibility == 'public') {
+            $client->editPermission($fileId, 'reader');
+        } else {
+            $client->editPermission($fileId, 'private');
+        }
+
         $archive->update($request->all());
 
 

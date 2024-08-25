@@ -21,7 +21,7 @@ export default function Login() {
                     <img src="/assets/ULM.webp" alt="" className="w-[100px] mx-auto" />
                     <h1 className="font-bold text-3xl text-gray-700 text-center mt-3">e-Arsip</h1>
                     <h1 className="font-semibold text-gray-700 text-center">Pendidikan Matematika FKIP ULM</h1>
-                    <form onSubmit={onSubmit} className="mt-10">
+                    {/* <form onSubmit={onSubmit} className="mt-10">
                         <Input variant="bordered" errorMessage={errors.username} isInvalid={errors.username ? true : false} type="text" label="Username" className="mt-4" onChange={e => setData('username', e.target.value)} disabled={processing} />
                         <Input variant="bordered" errorMessage={errors.password} isInvalid={errors.password ? true : false} type="password" label="Password" className="mt-4" onChange={e => setData('password', e.target.value)} disabled={processing} />
                         <div className="mt-4">
@@ -29,7 +29,11 @@ export default function Login() {
                                 Login
                             </Button>
                         </div>
-                    </form>
+                    </form> */}
+                    <a href={route('googleAuth')} className="mt-5 flex gap-2 items-center justify-center px-4 py-2 border-2 border-slate-200 rounded-lg hover:bg-slate-100 hover:border-blue-300 ">
+                        <img src="/assets/google.png" className="w-[30px]" />
+                        <p>Masuk dengan Google</p>
+                    </a>
                 </div>
             </div>
             <div className="basis-[70%] relative lg:block hidden">

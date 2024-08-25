@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Drive as AppDrive;
+use App\Models\User;
+use Google\Service\Drive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -43,5 +47,29 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function google_redirect()
+    {
+        return Socialite::driver('google')->scopes([Drive::DRIVE])->redirect();
+    }
+
+    public function google_callback(Request $request)
+    {
+        $auth = Socialite::driver('google')->user();
+        session(['token' => $auth->token]);
+
+        if (in_array($auth->email, ['fikriafa289@gmail.com'])) {
+            $user = User::where('role', 'admin')->firstOrFail();
+            Auth::login($user);
+
+            $request->session()->regenerate();
+
+            return redirect()->intended('arsip');
+        }
+
+        return redirect(route('login'))->withErrors([
+            'username' => 'Email tidak terdaftar',
+        ])->onlyInput('username');
     }
 }

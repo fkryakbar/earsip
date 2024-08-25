@@ -10,6 +10,7 @@ export default function UpdateDocument({ archive, categories, isOpen, onOpenChan
         title: currentArchive?.title,
         description: currentArchive?.description,
         category_id: currentArchive?.category_id,
+        visibility: currentArchive?.visibility,
     })
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -26,6 +27,7 @@ export default function UpdateDocument({ archive, categories, isOpen, onOpenChan
             title: archive?.title,
             description: archive?.description,
             category_id: archive?.category_id,
+            visibility: archive?.visibility,
         });
 
     }, [archive])
@@ -51,7 +53,7 @@ export default function UpdateDocument({ archive, categories, isOpen, onOpenChan
                             <form onSubmit={submit}>
                                 <Input type="Judul Dokumen" value={data?.title} onChange={e => setData('title', e.target.value)} variant={'bordered'} label="Judul" labelPlacement="outside" placeholder="Masukkan Judul" size="lg" errorMessage={errors.title} isInvalid={errors.title ? true : false} />
                                 <label htmlFor="message" className={`block mb-2 text-sm text-gray-900 mt-[20px] ${errors.description ? 'text-red-500' : ''}`}>Deksripsi Dokumen</label>
-                                <textarea id="message" value={data?.description? data?.description : '' } onChange={e => setData('description', e.target.value)} rows={4} className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black ${errors.description ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500' : ''}`} placeholder="Masukkan deskripsi Dokumen untuk mempermudah pencarian" disabled={processing}></textarea>
+                                <textarea id="message" value={data?.description ? data?.description : ''} onChange={e => setData('description', e.target.value)} rows={4} className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black ${errors.description ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500' : ''}`} placeholder="Masukkan deskripsi Dokumen untuk mempermudah pencarian" disabled={processing}></textarea>
                                 <p className="mb-[20px] text-sm text-red-600 dark:text-red-500">{errors.description}</p>
                                 <div className="flex flex-col gap-2 justify-center items-center w-[200px] p-4 rounded border-[1px] border-slate-300 mb-10 text-slate-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-16">
@@ -64,7 +66,7 @@ export default function UpdateDocument({ archive, categories, isOpen, onOpenChan
                                     label="Ketegori"
                                     placeholder="Pilih Kategori"
                                     variant="bordered"
-                                    className="max-w-xs"
+                                    className="max-w-xs mb-[40px]"
                                     labelPlacement="outside"
                                     onChange={e => setData('category_id', e.target.value)}
                                     isDisabled={processing}
@@ -75,8 +77,23 @@ export default function UpdateDocument({ archive, categories, isOpen, onOpenChan
                                 >
                                     {(category) => <SelectItem key={category.id} value={category.id}>{category.name}</SelectItem>}
                                 </Select>
+                                <Select
+                                    label="Visibility"
+                                    placeholder="Pilih Visibility"
+                                    variant="bordered"
+                                    className="max-w-xs"
+                                    labelPlacement="outside"
+                                    onChange={e => setData('visibility', e.target.value)}
+                                    isDisabled={processing}
+                                    errorMessage={errors.visibility} isInvalid={errors.visibility ? true : false}
+                                    value={data?.visibility}
+                                    selectedKeys={[data?.visibility as string]}
+                                >
+                                    <SelectItem key={'public'} value={'public'}>Public</SelectItem>
+                                    <SelectItem key={'private'} value={'private'}>Private</SelectItem>
+                                </Select>
                                 <div className="my-10"></div>
-    
+
                                 <div className="flex justify-end my-5">
                                     <Button type="submit" color="primary" disabled={processing} isLoading={processing}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('original_filename');
             $table->string('extension');
+            $table->string('visibility')->default('public');
             $table->string('size');
             $table->string('folderId');
             $table->string('driveLink');

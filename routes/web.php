@@ -15,6 +15,8 @@ Route::get('/', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/', [AuthController::class, 'loginAttempt'])->name('loginAttempt');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/auth/google', [AuthController::class, 'google_redirect'])->name('googleAuth');
+Route::get('/auth/google/callback', [AuthController::class, 'google_callback'])->name('googleCallback');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/arsip', [ArsipController::class, 'index'])->name('arsipPage');
@@ -27,8 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('/kategori/{id}', [KategoriController::class, 'update'])->name('updateKategori');
     Route::delete('/kategori/{id}', [KategoriController::class, 'delete'])->name('deleteKategori');
 
-    // Route::get('/config', [ConfigController::class, 'index'])->name('configPage');
-    // Route::post('/config', [ConfigController::class, 'update'])->name('updateConfig');
 
 
     Route::get('qouta', function () {

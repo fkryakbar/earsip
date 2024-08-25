@@ -56,6 +56,8 @@ class KategoriController extends Controller
         $category = Category::where('id', $id)->firstOrFail();
         $client = new Drive();
 
+        $client->deleteFolder($category->folderId);
+
         $category->delete();
         return back();
     }
