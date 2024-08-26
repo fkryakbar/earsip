@@ -47,7 +47,7 @@ export default function Index({ categories, archives, search }: { search: undefi
             },
             allowOutsideClick: () => !Swal.isLoading()
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
@@ -173,6 +173,7 @@ export default function Index({ categories, archives, search }: { search: undefi
                                 <TableColumn>Uploaded By</TableColumn>
                                 <TableColumn className="w-[100px] text-center">Kategori</TableColumn>
                                 <TableColumn className="w-[100px] text-center">Ukuran</TableColumn>
+                                <TableColumn className="text-center">Visibilitas</TableColumn>
                                 <TableColumn className="text-center">Waktu</TableColumn>
                                 <TableColumn className="text-center">Aksi</TableColumn>
                             </TableHeader>
@@ -187,6 +188,7 @@ export default function Index({ categories, archives, search }: { search: undefi
                                         <TableCell>{archive.user.name}</TableCell>
                                         <TableCell className="w-[100px] text-center"><Chip color="success" size="sm">{archive.category.name}</Chip></TableCell>
                                         <TableCell className="w-[100px] text-center">{(archive.size / (1024 ** 2)).toFixed(2)} MB</TableCell>
+                                        <TableCell className="text-xs w-[200px] text-center"><p className="capitalize">{archive.visibility}</p></TableCell>
                                         <TableCell className="text-xs w-[200px] text-center">{formatDate(archive.created_at)}</TableCell>
                                         <TableCell className="flex gap-2 items-center">
                                             <a href={archive.driveLink} target="_blank" className="text-xs bg-blue-500 text-white p-1 rounded">

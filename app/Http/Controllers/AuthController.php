@@ -59,7 +59,7 @@ class AuthController extends Controller
         $auth = Socialite::driver('google')->user();
         session(['token' => $auth->token]);
 
-        if (in_array($auth->email, ['fikriafa289@gmail.com'])) {
+        if (in_array($auth->email, ['fikriafa289@gmail.com', 'pendmatematika.fkipulm@gmail.com'])) {
             $user = User::where('role', 'admin')->firstOrFail();
             Auth::login($user);
 
