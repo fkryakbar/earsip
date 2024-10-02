@@ -36,7 +36,7 @@ class ArsipController extends Controller
         $request->validate([
             'title' => 'nullable|min:3',
             'category_id' => 'required|numeric',
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:2048',
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:10240',
             'visibility' => 'required',
         ]);
         if ($request->sameWithTitle) {
