@@ -1,123 +1,111 @@
 {
-  "_DashboardLayout-14kvR08z.js": {
-    "file": "assets/DashboardLayout-14kvR08z.js",
+  "_DashboardLayout-DeQjs8yv.js": {
+    "file": "assets/DashboardLayout-DeQjs8yv.js",
     "name": "DashboardLayout",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_SelectionManager-DiKwEruq.js": {
-    "file": "assets/SelectionManager-DiKwEruq.js",
+  "_SelectionManager-BdUxP9rJ.js": {
+    "file": "assets/SelectionManager-BdUxP9rJ.js",
     "name": "SelectionManager",
     "imports": [
       "resources/js/app.tsx",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js"
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js"
     ]
   },
-  "_chunk-KBN3H6OQ-ChnhDCBn.js": {
-    "file": "assets/chunk-KBN3H6OQ-ChnhDCBn.js",
-    "name": "chunk-KBN3H6OQ",
-    "imports": [
-      "resources/js/app.tsx",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_index-BKCXXJc-.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js"
-    ]
-  },
-  "_chunk-P2T5LMDM-CH51HvrX.js": {
-    "file": "assets/chunk-P2T5LMDM-CH51HvrX.js",
+  "_chunk-P2T5LMDM-BkveWYMd.js": {
+    "file": "assets/chunk-P2T5LMDM-BkveWYMd.js",
     "name": "chunk-P2T5LMDM",
     "imports": [
       "resources/js/app.tsx",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js"
+      "_chunk-T5T2WLXQ-YEMKb7CG.js"
     ]
   },
-  "_chunk-T5T2WLXQ-Cg8EgCoT.js": {
-    "file": "assets/chunk-T5T2WLXQ-Cg8EgCoT.js",
+  "_chunk-T5T2WLXQ-YEMKb7CG.js": {
+    "file": "assets/chunk-T5T2WLXQ-YEMKb7CG.js",
     "name": "chunk-T5T2WLXQ",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_chunk-X3QO5D2J-DrAO5JAo.js": {
-    "file": "assets/chunk-X3QO5D2J-DrAO5JAo.js",
+  "_chunk-X3QO5D2J-N_u2I_re.js": {
+    "file": "assets/chunk-X3QO5D2J-N_u2I_re.js",
     "name": "chunk-X3QO5D2J",
     "imports": [
       "resources/js/app.tsx",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_SelectionManager-DiKwEruq.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js"
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_SelectionManager-BdUxP9rJ.js",
+      "_chunk-P2T5LMDM-BkveWYMd.js"
     ]
   },
-  "_index-BKCXXJc-.js": {
-    "file": "assets/index-BKCXXJc-.js",
+  "_index-BXYulRoc.js": {
+    "file": "assets/index-BXYulRoc.js",
     "name": "index",
     "imports": [
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
       "resources/js/app.tsx"
     ]
   },
-  "_sweetalert2.all-BQs_XCNl.js": {
-    "file": "assets/sweetalert2.all-BQs_XCNl.js",
+  "_sweetalert2.all-C0IIXfvm.js": {
+    "file": "assets/sweetalert2.all-C0IIXfvm.js",
     "name": "sweetalert2.all",
     "imports": [
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_SelectionManager-DiKwEruq.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_SelectionManager-BdUxP9rJ.js",
       "resources/js/app.tsx",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-KBN3H6OQ-ChnhDCBn.js"
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_index-BXYulRoc.js"
     ]
   },
   "resources/js/Pages/Arsip/Index.tsx": {
-    "file": "assets/Index-D3EmHkXG.js",
+    "file": "assets/Index-Dpa_rrzT.js",
     "name": "Index",
     "src": "resources/js/Pages/Arsip/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_DashboardLayout-14kvR08z.js",
+      "_DashboardLayout-DeQjs8yv.js",
       "resources/js/Pages/Arsip/Partials/UploadDocument.tsx",
-      "_sweetalert2.all-BQs_XCNl.js",
+      "_sweetalert2.all-C0IIXfvm.js",
       "resources/js/Pages/Arsip/Partials/UpdateDocument.tsx",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_index-BKCXXJc-.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-KBN3H6OQ-ChnhDCBn.js",
-      "_chunk-X3QO5D2J-DrAO5JAo.js",
-      "_SelectionManager-DiKwEruq.js"
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_index-BXYulRoc.js",
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_chunk-X3QO5D2J-N_u2I_re.js",
+      "_SelectionManager-BdUxP9rJ.js"
     ]
   },
   "resources/js/Pages/Arsip/Partials/UpdateDocument.tsx": {
-    "file": "assets/UpdateDocument-Bkyn9sab.js",
+    "file": "assets/UpdateDocument-DO1Rjdg4.js",
     "name": "UpdateDocument",
     "src": "resources/js/Pages/Arsip/Partials/UpdateDocument.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_chunk-X3QO5D2J-DrAO5JAo.js",
-      "_SelectionManager-DiKwEruq.js"
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_chunk-X3QO5D2J-N_u2I_re.js",
+      "_SelectionManager-BdUxP9rJ.js"
     ]
   },
   "resources/js/Pages/Arsip/Partials/UploadDocument.tsx": {
-    "file": "assets/UploadDocument-D-ZzIj6F.js",
+    "file": "assets/UploadDocument-fptNEJ7S.js",
     "name": "UploadDocument",
     "src": "resources/js/Pages/Arsip/Partials/UploadDocument.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_index-BKCXXJc-.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_chunk-KBN3H6OQ-ChnhDCBn.js",
-      "_chunk-X3QO5D2J-DrAO5JAo.js",
-      "_SelectionManager-DiKwEruq.js"
+      "_index-BXYulRoc.js",
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_chunk-X3QO5D2J-N_u2I_re.js",
+      "_SelectionManager-BdUxP9rJ.js"
     ]
   },
   "resources/js/Pages/Auth/Login.tsx": {
-    "file": "assets/Login-Bs9MKdYM.js",
+    "file": "assets/Login-dWGq3WXQ.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.tsx",
     "isDynamicEntry": true,
@@ -126,59 +114,58 @@
     ]
   },
   "resources/js/Pages/Config/Index.tsx": {
-    "file": "assets/Index-C6LkqcBO.js",
+    "file": "assets/Index-GIHenO1U.js",
     "name": "Index",
     "src": "resources/js/Pages/Config/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_DashboardLayout-14kvR08z.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js"
+      "_DashboardLayout-DeQjs8yv.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js"
     ]
   },
   "resources/js/Pages/Kategori/Index.tsx": {
-    "file": "assets/Index-CmpvnwG8.js",
+    "file": "assets/Index-DcVdCmlc.js",
     "name": "Index",
     "src": "resources/js/Pages/Kategori/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_DashboardLayout-14kvR08z.js",
-      "_sweetalert2.all-BQs_XCNl.js",
+      "_DashboardLayout-DeQjs8yv.js",
+      "_sweetalert2.all-C0IIXfvm.js",
       "resources/js/Pages/Kategori/Partials/UpdateCategory.tsx",
       "resources/js/Pages/Kategori/Partials/CreateCategory.tsx",
-      "_index-BKCXXJc-.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_SelectionManager-DiKwEruq.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-KBN3H6OQ-ChnhDCBn.js"
+      "_index-BXYulRoc.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_SelectionManager-BdUxP9rJ.js",
+      "_chunk-P2T5LMDM-BkveWYMd.js"
     ]
   },
   "resources/js/Pages/Kategori/Partials/CreateCategory.tsx": {
-    "file": "assets/CreateCategory-D54vSL0P.js",
+    "file": "assets/CreateCategory-DzCLcxb3.js",
     "name": "CreateCategory",
     "src": "resources/js/Pages/Kategori/Partials/CreateCategory.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_index-BKCXXJc-.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js",
-      "_chunk-P2T5LMDM-CH51HvrX.js"
+      "_index-BXYulRoc.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js",
+      "_chunk-P2T5LMDM-BkveWYMd.js"
     ]
   },
   "resources/js/Pages/Kategori/Partials/UpdateCategory.tsx": {
-    "file": "assets/UpdateCategory-DC0UdNzx.js",
+    "file": "assets/UpdateCategory-DSvGA5Cj.js",
     "name": "UpdateCategory",
     "src": "resources/js/Pages/Kategori/Partials/UpdateCategory.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_chunk-P2T5LMDM-CH51HvrX.js",
-      "_chunk-T5T2WLXQ-Cg8EgCoT.js"
+      "_chunk-P2T5LMDM-BkveWYMd.js",
+      "_chunk-T5T2WLXQ-YEMKb7CG.js"
     ]
   },
   "resources/js/Pages/Welcome.tsx": {
-    "file": "assets/Welcome-TEl_X6kl.js",
+    "file": "assets/Welcome-BaCLW4AQ.js",
     "name": "Welcome",
     "src": "resources/js/Pages/Welcome.tsx",
     "isDynamicEntry": true,
@@ -187,7 +174,7 @@
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-Dx3_Ax8h.js",
+    "file": "assets/app-DGq00QsX.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -203,7 +190,7 @@
       "resources/js/Pages/Welcome.tsx"
     ],
     "css": [
-      "assets/app-C9I84qHJ.css"
+      "assets/app-DMue5WtJ.css"
     ]
   }
 }

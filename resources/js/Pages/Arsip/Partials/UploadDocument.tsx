@@ -5,13 +5,12 @@ import { FormEventHandler } from "react";
 
 export default function UploadDocument({ categories }: { categories: Category[] }) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
-    const { setData, data, processing, post, errors, progress, reset, recentlySuccessful } = useForm<{ title: string, description: string, category_id: string, file: any, sameWithTitle: boolean, visibility: string }>({
+    const { setData, data, processing, post, errors, progress, reset, recentlySuccessful } = useForm<{ title: string, description: string, category_id: string, file: any, visibility: string }>({
         title: '',
         description: '',
         category_id: '',
         visibility: '',
         file: '',
-        sameWithTitle: false,
     })
 
     const submit: FormEventHandler = (e) => {
@@ -26,7 +25,7 @@ export default function UploadDocument({ categories }: { categories: Category[] 
     }
     return <>
         <div className="flex items-center gap-2">
-            <Button variant="bordered" onPress={() => { window.location.href = "https://drive.google.com/drive/folders/1RS9av0dl-z-vZyuLSSwhP-XUCyGufzp-?usp=sharing" }}>
+            <Button variant="bordered" onPress={() => { window.location.href = "https://drive.google.com/drive/folders/1NiUmTwaVd91rJ-FepeDBsDFk7qF9wc_9" }}>
                 <img src="/assets/google-drive.png" alt="" className="w-[25px]" />
             </Button>
             <Button onPress={onOpen} className="bg-blue-500 text-white font-semibold">
@@ -53,8 +52,7 @@ export default function UploadDocument({ categories }: { categories: Category[] 
                                 </>) : null
                             }
                             <form onSubmit={submit}>
-                                <Input type="Judul Dokumen" value={data.title} onChange={e => setData('title', e.target.value)} variant={'bordered'} label="Judul" labelPlacement="outside" placeholder="Masukkan Judul" size="lg" isDisabled={data.sameWithTitle} errorMessage={errors.title} isInvalid={errors.title ? true : false} />
-                                <Checkbox className="mt-1" checked={data.sameWithTitle} onChange={e => setData('sameWithTitle', !data.sameWithTitle)}>Samakan dengan nama file</Checkbox>
+                                <Input type="Judul Dokumen" value={data.title} onChange={e => setData('title', e.target.value)} variant={'bordered'} label="Judul" labelPlacement="outside" placeholder="Masukkan Judul" size="lg" errorMessage={errors.title} isInvalid={errors.title ? true : false} />
                                 <label htmlFor="message" className={`block mb-2 text-sm text-gray-900 mt-[20px] ${errors.description ? 'text-red-500' : ''}`}>Deksripsi Dokumen</label>
                                 <textarea id="message" value={data.description} onChange={e => setData('description', e.target.value)} rows={4} className={`block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-black focus:border-black ${errors.description ? 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500  focus:border-red-500' : ''}`} placeholder="Masukkan deskripsi Dokumen untuk mempermudah pencarian" disabled={processing}></textarea>
                                 <p className="mb-[40px] text-sm text-red-600 dark:text-red-500">{errors.description}</p>

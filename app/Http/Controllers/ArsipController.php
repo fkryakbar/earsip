@@ -39,17 +39,17 @@ class ArsipController extends Controller
             'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf,doc,docx|max:10240',
             'visibility' => 'required',
         ]);
-        if ($request->sameWithTitle) {
-            $request->merge([
-                'title' => $request->file('file')->getClientOriginalName()
-            ]);
-        } else {
-            if ($request->title == null) {
-                throw ValidationException::withMessages([
-                    'title' => 'Title field is required'
-                ]);
-            }
-        }
+        // if ($request->sameWithTitle) {
+        //     $request->merge([
+        //         'title' => $request->file('file')->getClientOriginalName()
+        //     ]);
+        // } else {
+        //     if ($request->title == null) {
+        //         throw ValidationException::withMessages([
+        //             'title' => 'Title field is required'
+        //         ]);
+        //     }
+        // }
         $category = Category::where('id', $request->category_id)->firstOrFail();
         $drive = new Drive();
 
@@ -57,6 +57,9 @@ class ArsipController extends Controller
             $storedPath = $request->file('file')->storeAs('temporary', $request->title);
         } else {
             $storedPath = $request->file('file')->storeAs('temporary', $request->file('file')->getClientOriginalName());
+            $request->merge([
+                'title' => $request->file('file')->getClientOriginalName()
+            ]);
         }
 
         $path = Storage::path($storedPath);
