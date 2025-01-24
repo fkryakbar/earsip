@@ -181,7 +181,7 @@ export default function Index({ categories, archives, search }: { search: undefi
                                 {(archive) => (
                                     <TableRow key={archive.id}>
                                         <TableCell className="w-[200px]">
-                                            <p className="line-clamp-1">
+                                            <p className="line-clamp-2" title={archive.title}>
                                                 {archive.title}
                                             </p>
                                         </TableCell>
