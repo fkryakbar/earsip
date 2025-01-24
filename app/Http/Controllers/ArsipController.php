@@ -18,15 +18,16 @@ class ArsipController extends Controller
     public function index(Request $request)
     {
         $categories = Category::all();
-        $archives = Archive::with('user', 'category')->paginate();
+        $archivesQuery = Archive::query()->with('user', 'category')->orderBy('id', 'desc');
         $search = null;
         if ($request->search) {
             $search = $request->search;
-            $archives = Archive::where(function ($query) use ($search) {
+            $archivesQuery->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('description', 'like', '%' . $search . '%');
-            })->with('user', 'category')->paginate();
+            });
         }
+        $archives = $archivesQuery->paginate();
         // dd($archives);
         return Inertia::render('Arsip/Index', compact('categories', 'archives', 'search'));
     }

@@ -7,9 +7,9 @@ use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
-if (env('APP_ENV') === 'production') {
-    URL::forceScheme('https');
-}
+// if (env('APP_ENV') === 'production') {
+//     URL::forceScheme('https');
+// }
 
 Route::get('/', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/', [AuthController::class, 'loginAttempt'])->name('loginAttempt');
